@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, TextInput, View, Image } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, TextInput, View, Image, Alert } from 'react-native'
 import { Button, ButtonGroup } from 'react-native-elements';
-import { ImagePicker, Permissions } from 'expo'
+import * as ImagePicker from 'expo-image-picker'
+import * as Permissions from 'expo-permissions'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class AddNew extends Component {
@@ -10,67 +11,85 @@ export default class AddNew extends Component {
     artist: '',
     albumName: ''
    }
+
+  componentDidMount() {
+    this.getPermissionAsync();
+  }
+
+  getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
+      }
+    }
+  }
    
   selectPicture = async () => {
-    await Permissions.askAsync(Permissions.CAMERA_ROLL)
-    const { cancelled, uri } = await ImagePicker.launchImageLibraryAsynce({
-      aspect: 1,
-      allowsEditing: true
-    })
-    if (!cancelled) this.setState({ image: uri })
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        quality: 1,
+      })
+      if (!result.cancelled) {
+        this.setState({ image: result.uri })
+      }
+
+      console.log(result)
+    } catch (E) {
+      console.log(E)
+    }
   }
 
   takePicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA)
     const { cancelled, uri } = await ImagePicker.launchCameraAsync({
-      allowsEditing: false
+      allowsEditing: true,
+        quality: 1,
     })
     if (!cancelled) this.setState({ image: uri })
   }
 
   render() {
+    let { image } = this.state
     return ( 
       <View style={styles.container}>
         <Text style={styles.header}>Add New</Text>
-        <Image style={styles.image} source={this.state.image ? { uri: this.state.image }: null}/>
-        <View style={styles.row}>
-          <Button onPress={this.selectPicture}
-            title=' gallery'
-            style={styles.camButtons}
-            icon={<Icon name="image" size={15} color="white" />}
-          />
-          <Button onPress={this.takePicture}
-            title=' camera'
-            style={styles.camButtons}
-            icon={<Icon name="camera" size={15} color="white" />}
-          />
-          {/* <Text
-            onPress={this.updateIndex}
-            selectedIndex={this.selectedIndex}
-            buttons={['Hello', 'World', 'Buttons']}
-            containerStyle={{height: 100}}
-          /> */}
-          
-        </View>
+        {image
+          ? <TouchableOpacity onPress={() => Alert.alert("Retake Album Art", null, [
+              {text: 'Gallery', onPress: this.selectPicture},
+              {text: 'Camera', onPress: this.takePicture}
+            ])}>
+              <Image style={styles.image} source={{ uri: image }} />
+            </TouchableOpacity>
+          : <TouchableOpacity style={styles.image} onPress={() => Alert.alert("Add Album Art", null, [
+              {text: 'Take Photo', onPress: this.takePicture},
+              {text: 'Choose from Gallery', onPress: this.selectPicture},
+              {text: "Cancel", style: "cancel"}
+            ])}>
+            <Icon name='plus-square' size={50} color='gray'/>
+          </TouchableOpacity>
+          }
         <View style={styles.form}>
           <TextInput
             style={styles.inputStyle}
             placeholder="Artist"
             value={this.state.artist}
-            onChange={text => this.setState({ artist: text })}
+            onChangeText={text => this.setState({ artist: text })}
             placeholderTextColor="#111"
           />
           <TextInput
             style={styles.inputStyle}
             placeholder="Album"
             value={this.state.album}
-            onChange={text => this.setState({ albumName: text })}
+            onChangeText={text => this.setState({ albumName: text })}
             placeholderTextColor="#111"
           />
         </View>
-        <View style={styles.confirmButton}>
+        <TouchableOpacity style={styles.confirmButton} onPress={() => alert(`${this.state.artist} and album name ${this.state.albumName}`)}>
           <Text style={styles.confButton}>Confirm</Text>
-        </View>
+        </TouchableOpacity>
       </View>
      )
   }
@@ -85,7 +104,10 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 40,
-    paddingBottom: 30
+    paddingLeft: 55,
+    paddingBottom: 20,
+    alignSelf: 'flex-start',
+    color: 'white',
   },
   text: {
     fontSize: 20,
@@ -96,7 +118,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 15
   },
-  image: { width: 300, height: 300, backgroundColor: '#111' },
+  image: {
+    width: 300,
+    height: 300,
+    backgroundColor: '#111',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   button: {
     padding: 13,
     margin: 15,

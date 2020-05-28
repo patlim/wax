@@ -1,7 +1,9 @@
 import React from "react"
-import { ImageBackground, StyleSheet, View, Image } from "react-native"
+import { ImageBackground, StyleSheet, View, Image, Button } from "react-native"
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
-const WelcomScreen = (props) => {
+export default function WelcomScreen ({ navigation }) {
   return (
     <ImageBackground
       style={styles.background}
@@ -11,8 +13,9 @@ const WelcomScreen = (props) => {
       }}
     >
       <Image style={styles.logo} source={require("../assets/logo.png")} />
-      <View style={styles.loginButton}></View>
-      <View style={styles.regButton}></View>
+      <View style={styles.inputStyle}></View>
+      <View style={styles.inputStyle}></View>
+      <Button title='Enter' style={styles.inputStyle} onPress={() => navigation.navigate('Details')}/>
     </ImageBackground>
   )
 }
@@ -23,15 +26,14 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
   },
-  loginButton: {
-    width: "100%",
-    height: 70,
-    backgroundColor: "blue",
-  },
-  regButton: {
-    width: "100%",
-    height: 70,
-    backgroundColor: "red",
+  inputStyle: {
+    color: '#fff',
+    marginTop: 20,
+    width: 300,
+    height: 40,
+    paddingHorizontal: 10,
+    borderRadius: 50,
+    backgroundColor: '#333'
   },
   logo: {
     alignSelf: "center",
@@ -42,4 +44,3 @@ const styles = StyleSheet.create({
   },
 })
 
-export default WelcomScreen
