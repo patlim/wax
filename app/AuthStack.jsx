@@ -59,6 +59,7 @@ export const AuthStack = ({}) => {
 
 const styles = StyleSheet.create({
   center: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },

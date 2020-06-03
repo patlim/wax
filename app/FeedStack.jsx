@@ -82,6 +82,7 @@ export const FeedStack = ({}) => {
           headerRight: () => {
             return (
               <TouchableOpacity
+                style={{ paddingRight: 15 }}
                 onPress={() => {
                   logout()
                 }}
@@ -99,6 +100,7 @@ export const FeedStack = ({}) => {
 
 const styles = StyleSheet.create({
   center: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
