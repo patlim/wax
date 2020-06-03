@@ -22,7 +22,6 @@ export default class WelcomScreen extends Component {
 
 const styles = StyleSheet.create({
   background: {
-    flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
   },

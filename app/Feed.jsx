@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { View, FlatList, Button } from "react-native"
+import { View, ScrollView, FlatList, Button, Image, Text } from "react-native"
+import { Card } from "react-native-elements"
 
 import { getEntries } from "./actions/entry"
 
@@ -10,22 +11,24 @@ class Feed extends Component {
   }
 
   render() {
-    console.log(this.props.entryList);
-    
     return (
       <View>
         <FlatList
           style={{ width: "100%" }}
-          renderItem={({ item }) => {
-            return <Button
-              title={item.name}
-              onPress={() => {
-                this.props.navigation.navigate("Product", {
-                  name: item.name
-                })
-              }}
-            />
-          }}
+          renderItem={({ item }) => (
+            <Card>
+              <Text>{item.name}</Text>
+              <Image source={{ width: "100%", height: 200, uri: item.img }} />
+              <Button
+                title="view"
+                onPress={() => {
+                  this.props.navigation.navigate("Product", {
+                    name: item.name,
+                  })
+                }}
+              />
+            </Card>
+          )}
           keyExtractor={(product, idx) => product + idx} //fix this to be item id
           data={this.props.entryList}
         />
@@ -37,7 +40,6 @@ class Feed extends Component {
 const mapStateToProps = (state) => {
   return {
     entryList: state.entries,
-    selectedCategory: state.categories.selectedCategory,
   }
 }
 

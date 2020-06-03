@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#dddddd',
   },
   container: {
-    flex: 1,
     backgroundColor: '#222',
     alignItems: 'center',
     justifyContent: 'center'

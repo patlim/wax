@@ -33,8 +33,8 @@ export const AppTabs = ({}) => {
           let iconName
           if (route.name === "Feed") {
             iconName = focused
-              ? "ios-information-circle"
-              : "ios-information-circle-outline"
+              ? "ios-list-box"
+              : "ios-list"
           } else if (route.name === "Search") {
             iconName = focused ? "ios-list-box" : "ios-list"
           } else if (route.name === "AddNew") {
@@ -49,7 +49,7 @@ export const AppTabs = ({}) => {
       }}
     >
       <Tabs.Screen name="Feed" component={FeedStack} />
-      <Tabs.Screen name="Search" component={Search} />
+      <Tabs.Screen name="Other" component={Search} />
       {/* <Tabs.Screen name="AddNew" component={AddNew} /> */}
     </Tabs.Navigator>
   )
@@ -57,7 +57,6 @@ export const AppTabs = ({}) => {
 
 const styles = StyleSheet.create({
   center: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
