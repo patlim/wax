@@ -1,10 +1,18 @@
 import React from "react"
-import 'react-native-gesture-handler'
-import { Providers } from './app/config/Providers'
+import { Provider } from "react-redux"
+import { createStore, applyMiddleware, compose } from "redux"
+import "react-native-gesture-handler"
+import thunkMiddleware from "redux-thunk"
+
+import reducers from "./app/reducers/index"
+import { Providers } from "./app/Providers"
+
+const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 export default function App() {
   return (
-    <Providers />
+    <Provider store={store}>
+      <Providers />
+    </Provider>
   )
 }
-

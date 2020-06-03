@@ -3,31 +3,10 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { StyleSheet, View } from "react-native"
 import { AuthContext } from "./AuthProvider"
 import { Text, TouchableOpacity, FlatList, Button } from "react-native"
-import faker from "faker"
+
+import Feed from './Feed'
 
 const Stack = createStackNavigator()
-
-function Feed({ navigation }) {
-  return (
-    <View>
-      <FlatList
-        style={{ width: "100%" }}
-        renderItem={({ item }) => (
-          <Button
-            title={item}
-            onPress={() => {
-              navigation.navigate("Product", {
-                name: item,
-              })
-            }}
-          />
-        )}
-        keyExtractor={(product, idx) => product + idx}
-        data={Array.from(Array(50), () => faker.commerce.product())}
-      />
-    </View>
-  )
-}
 
 function Product({ route, navigation }) {
   return (
@@ -69,7 +48,7 @@ function EditProduct({ route, navigation }) {
   )
 }
 
-export const HomeStack = ({}) => {
+export const FeedStack = ({}) => {
   const { logout } = useContext(AuthContext)
   return (
     <Stack.Navigator initialRouteName="Feed">
