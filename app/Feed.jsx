@@ -26,7 +26,7 @@ class Feed extends Component {
               }}
             />
           }}
-          keyExtractor={(product, idx) => product + idx}
+          keyExtractor={(product, idx) => product + idx} //fix this to be item id
           data={this.props.entryList}
         />
       </View>
