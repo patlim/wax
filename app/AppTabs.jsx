@@ -5,7 +5,7 @@ import { Ionicons } from "react-native-vector-icons"
 
 import { AuthContext } from "./AuthProvider"
 import { FeedStack } from "./FeedStack"
-// import { AddNew } from "../screens/AddNew"
+import AddNew from "./AddNew"
 
 const Tabs = createBottomTabNavigator()
 
@@ -13,14 +13,6 @@ function Search() {
   return (
     <View style={styles.center}>
       <Text>Search</Text>
-    </View>
-  )
-}
-
-function AddNew() {
-  return (
-    <View style={styles.center}>
-      <Text>AddNew</Text>
     </View>
   )
 }
@@ -49,8 +41,8 @@ export const AppTabs = ({}) => {
       }}
     >
       <Tabs.Screen name="Feed" component={FeedStack} />
-      <Tabs.Screen name="Other" component={Search} />
-      {/* <Tabs.Screen name="AddNew" component={AddNew} /> */}
+      {/* <Tabs.Screen name="Other" component={Search} /> */}
+      <Tabs.Screen name="AddNew" component={AddNew} />
     </Tabs.Navigator>
   )
 }

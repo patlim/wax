@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, TextInput, View, Image, Alert } from 'react-native'
 import { Button, ButtonGroup } from 'react-native-elements';
+import * as Constants from 'expo-constants'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
 import Icon from 'react-native-vector-icons/FontAwesome'

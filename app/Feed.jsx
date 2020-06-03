@@ -12,7 +12,7 @@ class Feed extends Component {
 
   render() {
     return (
-      <View style={{ backgroundColor: "#ddd" }}>
+      <View >
         <FlatList
           style={{ width: "100%" }}
           renderItem={({ item }) => (
@@ -23,14 +23,17 @@ class Feed extends Component {
                 })
               }}
               style={{
-                borderBottomLeftRadius: 7,
-                borderBottomRightRadius: 7,
+                shadowColor: 'rgba(0,0,0, .2)',
+                shadowOffset: { height: 1, width: 1 },
+                shadowOpacity: 1,
+                shadowRadius: 1,
+                borderRadius: 7,
                 alignSelf: "center",
                 width: "95%",
                 backgroundColor: "white",
                 height: 290,
-                marginBottom: 20,
-                marginTop: 20,
+                marginBottom: 5,
+                marginTop: 5,
               }}
             >
               <Image
@@ -43,7 +46,7 @@ class Feed extends Component {
                 source={{ uri: item.img }}
               />
               <View style={{ padding: 15 }}>
-                <Text style={{ fontSize: '20px' }}>{item.name}</Text>
+                <Text style={{ fontSize: 15 }}>{item.name}</Text>
                 <Text>{item.artist}</Text>
                 <Text style={{ alignSelf: 'flex-end' }}>{item.date}</Text>
               </View>
