@@ -4,11 +4,15 @@ This is where you can save and show your mates the newest edition to your collec
 
 This is my first react native app and still in progress
 Here are some screenshots, if you would like to demo the app feel free to contact me!
+
 Feed:
+
 ![Feed](https://github.com/patlim/wax/blob/master/app/assets/feed.png)
 
 Profile:
+
 ![Profile](https://github.com/patlim/wax/blob/master/app/assets/profile.png)
 
 AddNew:
+
 ![AddNew](https://github.com/patlim/wax/blob/master/app/assets/addNew.png)
