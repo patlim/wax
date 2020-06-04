@@ -1,11 +1,12 @@
 import React, { useContext } from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { NavigationContainer, View, Text, Button, StyleSheet } from "react-native"
+import { Image, Text, View, StyleSheet } from "react-native"
 import { Ionicons } from "react-native-vector-icons"
 
 import { AuthContext } from "./AuthProvider"
 import { FeedStack } from "./FeedStack"
 import AddNew from "./AddNew"
+import Profile from "./Profile"
 
 const Tabs = createBottomTabNavigator()
 
@@ -15,15 +16,9 @@ export const AppTabs = ({}) => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName
-          if (route.name === "Feed") {
-            iconName = focused
-              ? "ios-list-box"
-              : "ios-list"
-          } else if (route.name === "Search") {
-            iconName = focused ? "ios-list-box" : "ios-list"
-          } else if (route.name === "AddNew") {
-            iconName = focused ? "ios-add-circle" : "ios-add-circle"
-          }
+          if (route.name === "Feed") return <Ionicons name="ios-list" size={size} color={color} />
+          else if (route.name === "AddNew") return <Ionicons name='ios-add-circle' size={size} color={color} />
+          else if (route.name === "Profile") return <Image style={styles.profileImg} source={{ uri: 'https://images.unsplash.com/photo-1579295560051-3df968edb036?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80' }}/>
           return <Ionicons name={iconName} size={size} color={color} />
         },
       })}
@@ -34,6 +29,7 @@ export const AppTabs = ({}) => {
     >
       <Tabs.Screen name="Feed" component={FeedStack} />
       <Tabs.Screen name="AddNew" component={AddNew} />
+      <Tabs.Screen name="Profile" component={Profile} />
     </Tabs.Navigator>
   )
 }
@@ -44,4 +40,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  profileImg: {
+    width: 25,
+    height: 25,
+    borderRadius: 25/2
+  }
 })

@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { Button, ButtonGroup } from "react-native-elements"
 import * as ImagePicker from "expo-image-picker"
 import * as Permissions from "expo-permissions"
 import Icon from "react-native-vector-icons/FontAwesome"
@@ -14,6 +13,7 @@ import {
   Alert,
   SafeAreaView,
 } from "react-native"
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { addToFeed } from "./actions/feed"
 
@@ -70,7 +70,7 @@ class AddNew extends Component {
     let { image } = this.state
     return (
       <SafeAreaView>
-        <View style={styles.container}>
+        <KeyboardAwareScrollView behavior='padding' contentContainerStyle={styles.container}>
           <Text style={styles.header}>Add New</Text>
           {image ? (
             <TouchableOpacity
@@ -119,7 +119,7 @@ class AddNew extends Component {
           >
             <Text style={styles.confButton}>Confirm</Text>
           </TouchableOpacity>
-        </View>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
     )
   }
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
