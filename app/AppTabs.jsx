@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { View, Text, Button, StyleSheet } from "react-native"
+import { NavigationContainer, View, Text, Button, StyleSheet } from "react-native"
 import { Ionicons } from "react-native-vector-icons"
 
 import { AuthContext } from "./AuthProvider"
@@ -8,14 +8,6 @@ import { FeedStack } from "./FeedStack"
 import AddNew from "./AddNew"
 
 const Tabs = createBottomTabNavigator()
-
-function Search() {
-  return (
-    <View style={styles.center}>
-      <Text>Search</Text>
-    </View>
-  )
-}
 
 export const AppTabs = ({}) => {
   return (
@@ -41,7 +33,6 @@ export const AppTabs = ({}) => {
       }}
     >
       <Tabs.Screen name="Feed" component={FeedStack} />
-      {/* <Tabs.Screen name="Other" component={Search} /> */}
       <Tabs.Screen name="AddNew" component={AddNew} />
     </Tabs.Navigator>
   )
