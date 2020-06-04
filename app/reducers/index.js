@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux'
 
-import entries from './entry'
-import categories from './category'
+import feed from './feed'
 
 export default combineReducers({
-  entries,
-  categories,
+  feed
 })

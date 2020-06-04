@@ -3,16 +3,16 @@ import { connect } from "react-redux"
 import { View, TouchableOpacity, FlatList, Button, Image, Text } from "react-native"
 import { Card } from "react-native-elements"
 
-import { getEntries } from "./actions/entry"
+import { getFeed } from "./actions/feed"
 
 class Feed extends Component {
   componentDidMount() {
-    this.props.dispatch(getEntries())
+    this.props.dispatch(getFeed())
   }
 
   render() {
     return (
-      <View >
+      <View style={{ backgroundColor: '#fff' }}>
         <FlatList
           style={{ width: "100%" }}
           renderItem={({ item }) => (
@@ -43,7 +43,7 @@ class Feed extends Component {
                   width: "100%",
                   height: 200,
                 }}
-                source={{ uri: item.img }}
+                source={{ uri: item.image }}
               />
               <View style={{ padding: 15 }}>
                 <Text style={{ fontSize: 15 }}>{item.name}</Text>
@@ -53,7 +53,7 @@ class Feed extends Component {
             </TouchableOpacity>
           )}
           keyExtractor={(product, idx) => product + idx} //fix this to be item id
-          data={this.props.entryList}
+          data={this.props.feedList}
         />
       </View>
     )
@@ -62,7 +62,7 @@ class Feed extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    entryList: state.entries,
+    feedList: state.feed
   }
 }
 
