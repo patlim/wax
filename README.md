@@ -2,8 +2,8 @@
 An app for the record collectors.
 This is where you can save and show your mates the newest edition to your collections.
 
-This is my first react native app and still in progress
-Here are some screenshots, if you would like to demo the app feel free to contact me!
+This is my first react native app and still in progress, currently working on ios/android (some features missing)
+https://expo.io/@patlim/wax - must have expo app installed on phone to demo
 
 Feed:
 
