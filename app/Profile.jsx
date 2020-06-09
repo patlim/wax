@@ -51,7 +51,7 @@ class Profile extends Component {
               "https://images.unsplash.com/photo-1579295560051-3df968edb036?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
           }}
         />
-        <Text style={{ padding: 30, fontSize: 30 }}>Jane Doe</Text>
+        <Text style={{ padding: 30, fontSize: 30 }}>Jane</Text>
         <Text style={{ fontSize: 15 }}>Collection Size: 24</Text>
         <Text style={{ fontSize: 15 }}>info</Text>
         <Text style={{ fontSize: 15 }}>more info</Text>

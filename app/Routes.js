@@ -24,9 +24,6 @@ export const Routes = ({}) => {
       })
   }, [])
 
-  if (loading) {
-    return <ActivityIndicator size="large" />
-  }
   return (
     <NavigationContainer>
       {user ? <AppTabs /> : <AuthStack />}
