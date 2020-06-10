@@ -22,9 +22,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pat.wax"
     },
     "description": "",
-    "githubUrl": "https://github.com/patlim/wax"
+    "githubUrl": "https://github.com/patlim/wax",
+    "android": {
+      "package": "com.pat.wax"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }

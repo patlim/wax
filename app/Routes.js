@@ -1,32 +1,33 @@
-import React, { useContext, useState, useEffect } from "react"
+import React from "react"
 import { NavigationContainer } from "@react-navigation/native"
-import { ActivityIndicator, AsyncStorage } from "react-native"
+import firebase from "react-native-firebase"
 
-import { AuthContext } from "./AuthProvider"
 import { AppTabs } from "./AppTabs"
-import { AuthStack } from './AuthStack'
+import { AuthStack } from "./AuthStack"
+import { Loading } from "./Loading"
 
-export const Routes = ({}) => {
-  const { user, login } = useContext(AuthContext)
-  const [loading, setLoading] = useState(true)
+export class Routes extends React.Component {
+  state = {
+    isLoading: true,
+    currentUser: null
+  }
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ isLoading: false })
+      const { currentUser } = firebase.auth()
+      this.setState({ currentUser })
+    })
+  }
 
-  useEffect(() => {
-    // check if user logged in
-    AsyncStorage.getItem("user")
-      .then((userString) => {
-        if (userString) {
-          login()
+  render() {
+    const { isLoading, currentUser } = this.state
+    return (
+      <NavigationContainer>
+        { isLoading
+          ? <Loading />
+          : user ? <AppTabs /> : <AuthStack />
         }
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
-
-  return (
-    <NavigationContainer>
-      {user ? <AppTabs /> : <AuthStack />}
-    </NavigationContainer>
-  )
+      </NavigationContainer>
+    )
+  }
 }
