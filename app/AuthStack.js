@@ -5,7 +5,6 @@ import { View, Text, Button, StyleSheet } from "react-native"
 import { AuthContext } from "./AuthProvider"
 import SignUp from './SignUp'
 import Login from './Login'
-import Loading from './Loading'
 
 const Stack = createStackNavigator()
 
@@ -19,7 +18,6 @@ export const AuthStack = ({}) => {
     >
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen options={{ headerTitle: "Sign Up" }} name="SignUp" component={SignUp} />
-      <Stack.Screen name="Loading" component={Loading} />
     </Stack.Navigator>
   )
 }

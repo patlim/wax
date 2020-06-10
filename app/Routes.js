@@ -1,21 +1,25 @@
 import React from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import firebase from "react-native-firebase"
+import { connect } from "react-redux"
 
 import { AppTabs } from "./AppTabs"
 import { AuthStack } from "./AuthStack"
 import { Loading } from "./Loading"
 
-export class Routes extends React.Component {
+import { loginUser } from "./actions/user"
+
+class Routes extends React.Component {
   state = {
     isLoading: true,
     currentUser: null
   }
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ isLoading: false })
+    this.setState({ isLoading: false })
+    firebase.auth().onAuthStateChanged(() => {
       const { currentUser } = firebase.auth()
       this.setState({ currentUser })
+      this.props.dispatch(loginUser(currentUser))
     })
   }
 
@@ -25,9 +29,11 @@ export class Routes extends React.Component {
       <NavigationContainer>
         { isLoading
           ? <Loading />
-          : user ? <AppTabs /> : <AuthStack />
+          : currentUser ? <AppTabs /> : <AuthStack />
         }
       </NavigationContainer>
     )
   }
 }
+
+export default connect()(Routes)

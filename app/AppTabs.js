@@ -3,8 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Image, Text, View, StyleSheet } from "react-native"
 import { Ionicons } from "react-native-vector-icons"
 
-import { AuthContext } from "./AuthProvider"
-import { FeedStack } from "./FeedStack"
+import FeedStack from "./FeedStack"
 import AddNew from "./AddNew"
 import Profile from "./Profile"
 

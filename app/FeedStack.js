@@ -1,10 +1,12 @@
-import React, { useContext, useRef, useState, useEffect } from "react"
+import React, { useRef, useState, useEffect } from "react"
+import firebase from 'react-native-firebase'
 import { createStackNavigator } from "@react-navigation/stack"
 import { StyleSheet, View } from "react-native"
-import { AuthContext } from "./AuthProvider"
-import { Text, TouchableOpacity, FlatList, Button } from "react-native"
+import { Text, TouchableOpacity, Button } from "react-native"
+import { connect } from 'react-redux'
 
 import Feed from './Feed'
+import { logoutUser } from './actions/user'
 
 const Stack = createStackNavigator()
 
@@ -48,8 +50,7 @@ function EditProduct({ route, navigation }) {
   )
 }
 
-export const FeedStack = ({}) => {
-  const { logout } = useContext(AuthContext)
+const FeedStack = ({}) => {
   return (
     <Stack.Navigator initialRouteName="Feed">
       <Stack.Screen
@@ -84,7 +85,9 @@ export const FeedStack = ({}) => {
               <TouchableOpacity
                 style={{ paddingRight: 15 }}
                 onPress={() => {
-                  logout()
+                  firebase.auth().signOut().then(() => {
+                    this.props.dispatch(logoutUser())
+                  })
                 }}
               >
                 <Text>LOGOUT</Text>
@@ -105,3 +108,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 })
+
+export default connect()(FeedStack)
