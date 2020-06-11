@@ -25,7 +25,7 @@ export const Routes = ({}) => {
       })
   }, [])
 
-  if (loading) return Loading
+  if (loading) return <Loading />
   return (
     <NavigationContainer>
       {user ? <AppTabs /> : <AuthStack />}
