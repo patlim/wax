@@ -5,6 +5,7 @@ import { ActivityIndicator, AsyncStorage } from "react-native"
 import { AuthContext } from "./AuthProvider"
 import { AppTabs } from "./AppTabs"
 import { AuthStack } from './AuthStack'
+import Loading from "./Loading"
 
 export const Routes = ({}) => {
   const { user, login } = useContext(AuthContext)
@@ -24,6 +25,7 @@ export const Routes = ({}) => {
       })
   }, [])
 
+  if (loading) return Loading
   return (
     <NavigationContainer>
       {user ? <AppTabs /> : <AuthStack />}
