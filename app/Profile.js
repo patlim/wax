@@ -8,11 +8,11 @@ import {
   ScrollView,
 } from "react-native"
 import { connect } from "react-redux"
+import firebase from "react-native-firebase"
 
 import { getFeed } from "./actions/feed"
 
 function HorizontalFlatListItem({ item }) {
-  state = { currentUser: null }
   return (
     <Image
       style={{
@@ -25,7 +25,7 @@ function HorizontalFlatListItem({ item }) {
         borderTopRightRadius: 7,
         width: 250,
         height: 250,
-        margin: 5
+        margin: 5,
       }}
       source={{ uri: item.image }}
     />
@@ -33,12 +33,14 @@ function HorizontalFlatListItem({ item }) {
 }
 
 class Profile extends Component {
+  state = {
+    user: {},
+  }
   componentDidMount() {
     this.props.dispatch(getFeed())
-    console.log(this.props.currentUser)
   }
   render() {
-    const { currentUser } = this.props
+    const { email } = firebase.auth().currentUser
     return (
       <ScrollView contentContainerStyle={styles.center}>
         <Image
@@ -53,12 +55,14 @@ class Profile extends Component {
               "https://images.unsplash.com/photo-1579295560051-3df968edb036?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
           }}
         />
-        <Text style={{ padding: 30, fontSize: 30 }}>{currentUser}</Text>
+        <Text style={{ padding: 30, fontSize: 30 }}>{email}</Text>
         <Text style={{ fontSize: 15 }}>Collection Size: 24</Text>
         <Text style={{ fontSize: 15 }}>info</Text>
         <Text style={{ fontSize: 15 }}>more info</Text>
         <View style={{ marginBotton: 50 }}>
-          <Text style={{ paddingLeft: 30, paddingTop: 30, fontSize: 20 }}>Collection</Text>
+          <Text style={{ paddingLeft: 30, paddingTop: 30, fontSize: 20 }}>
+            Collection
+          </Text>
           <FlatList
             horizontal={true}
             renderItem={({ item }) => <HorizontalFlatListItem item={item} />}
@@ -80,7 +84,6 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     feedList: state.feed,
-    currentUser: state.user
   }
 }
 
