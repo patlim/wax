@@ -1,7 +1,8 @@
-import React, { useContext } from "react"
+import React from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { Image, Text, View, StyleSheet } from "react-native"
+import { Image, StyleSheet } from "react-native"
 import { Ionicons } from "react-native-vector-icons"
+import firebase from "react-native-firebase"
 
 import FeedStack from "./FeedStack"
 import AddNew from "./AddNew"
@@ -17,7 +18,7 @@ export const AppTabs = ({}) => {
           let iconName
           if (route.name === "Feed") return <Ionicons name="ios-list" size={size} color={color} />
           else if (route.name === "AddNew") return <Ionicons name='ios-add-circle' size={size} color={color} />
-          else if (route.name === "Profile") return <Image style={styles.profileImg} source={{ uri: 'https://images.unsplash.com/photo-1579295560051-3df968edb036?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80' }}/>
+          else if (route.name === "Profile") return <Image style={styles.profileImg} source={{ uri: firebase.auth().currentUser.photoURL }}/>
           return <Ionicons name={iconName} size={size} color={color} />
         },
       })}

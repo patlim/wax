@@ -40,7 +40,7 @@ class Profile extends Component {
     this.props.dispatch(getFeed())
   }
   render() {
-    const { displayName } = firebase.auth().currentUser
+    const { displayName, photoURL } = firebase.auth().currentUser
     return (
       <ScrollView contentContainerStyle={styles.center}>
         <Image
@@ -51,8 +51,7 @@ class Profile extends Component {
             borderRadius: 200 / 2,
           }}
           source={{
-            uri:
-              "https://images.unsplash.com/photo-1579295560051-3df968edb036?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+            uri: (photoURL) ? photoURL : 'https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg',
           }}
         />
         <Text style={{ padding: 30, fontSize: 30 }}>{displayName}</Text>
