@@ -17,8 +17,8 @@ AddNew:
 
 ![AddNew](https://github.com/patlim/wax/blob/master/app/assets/addNew.png)
 
-FireBase Authentication:
+Authentication:
 
-![Login](https://github.com/patlim/wax/blob/master/app/assets/login.png)
-![SignUp](https://github.com/patlim/wax/blob/master/app/assets/signUp.png)
-![SignUpError](https://github.com/patlim/wax/blob/master/app/assets/signUpError.png)
+![Login](https://github.com/patlim/wax/blob/master/app/assets/Login.png)
+![SignUp](https://github.com/patlim/wax/blob/master/app/assets/SignUp.png)
+![SignUpError](https://github.com/patlim/wax/blob/master/app/assets/SignUpError.png)
